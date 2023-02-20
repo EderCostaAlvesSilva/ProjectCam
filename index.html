@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Ler Barcode </title>
+</head>
+
+<body>
+
+    <div id="resultado"></div>
+    <button id="camera">ligar camera</button>
+
+    <script src="quagga.min.js"></script>
+
+    <script>
+        Quagga.init({
+            inputStream: {
+                name: "Live",
+                type: "LiveStream",
+                target: document.querySelector('#camera'),
+                constraints: {
+                    facingMode: "environment"    // seleciona a câmera traseira
+                }
+            },
+            decoder: {
+                readers: ["ean_reader"]
+            }
+        }, function (err) {
+            if (err) {
+                console.log(err);
+                return
+            }
+            Quagga.start();
+        });
+
+    </script>
+
+</body>
+
+</html>
